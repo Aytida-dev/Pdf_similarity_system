@@ -64,13 +64,13 @@ def init():
         print("init_invoices folder not found...")
         print("init_invoices folder created, please add the pdf files to be compared..")
         os.makedirs(init_folder)
-        return
+        os._exit(0)
 
     pdf_files = [f for f in os.listdir(init_folder) if f.lower().endswith(".pdf")]
     
     if not pdf_files:
         print("No pdf files found in init_invoices folder exiting...")
-        return
+        os._exit(0)
 
     with multiprocessing.Pool() as pool:
         results = pool.starmap(process_pdf, [(filename, init_folder) for filename in pdf_files])
